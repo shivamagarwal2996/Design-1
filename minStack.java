@@ -1,43 +1,37 @@
 class MinStack {
-
-    /** initialize your data structure here. */
-    Stack <Integer> st;
+    Stack<Integer> s;
+    Stack<Integer> minStack;
     int min;
     public MinStack() {
-        st = new Stack<>();
+        s = new Stack<>();
+        minStack = new Stack<>();
         min = Integer.MAX_VALUE;
-        st.push(min);
+        minStack.push(min);
     }
     
-    public void push(int val) {
-       if(val <= min)
-       {
-           st.push(min);
-           min = val;
-       }
-        st.push(val);
+    public void push(int value) {
+        if(min > value){
+            min = value;
+        }
+        s.push(value);
+        minStack.push(min);
+      
     }
     
     public void pop() {
-        if (min == st.pop())
-        {
-            min = st.pop();
-        }
+        s.pop();
+        minStack.pop();
+        min = minStack.peek();
     }
     
     public int top() {
-        return st.peek();
+        return s.peek();
     }
     
     public int getMin() {
-        return min;
+        return minStack.peek();
     }
 }
 
-// Time Complexity :O(1)
-// Space Complexity :O(N)
-// Did this code successfully run on Leetcode :yes
-// Any problem you faced while coding this :
-
-
-// Your code here along with comments explaining your approach
+// TC : O(1) we have O(1) operations in every function
+//SC: O(N) N is number of push operations 
